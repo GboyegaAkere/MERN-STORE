@@ -65,6 +65,7 @@ const profileUpload = async (e) => {
                         <label>Name:</label>
                         <div className='bg-slate-100 p-2'>
                             <input 
+                               required
                                 type='text'
                                 name='name'
                                 value={data.name} 
@@ -79,6 +80,7 @@ const profileUpload = async (e) => {
                         <label>Email :</label>
                         <div className='bg-slate-100 p-2'>
                             <input 
+                                required
                                 type='email'
                                 name='email'
                                 value={data.email} 
@@ -93,6 +95,7 @@ const profileUpload = async (e) => {
                         <label>Password :</label>
                         <div  className='bg-slate-100 p-2 flex items-center'>
                             <input 
+                               required
                                 type='password' 
                                 name='password'
                                 value={data.password} 
