@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import loginicons from "../assest/signin.gif"
 import { FaEye } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
+import imageUpload from '../helpers/imageUpload'
 
 function SignUp() {
 
@@ -11,7 +12,7 @@ function SignUp() {
     email :"",
     password:"",
     confirmPassword:"",
-    profileImage:"s"
+    profileImage:""
  })
  
  //CREATING A FUNCTION FOR THE FORM INPUT
@@ -26,13 +27,37 @@ function SignUp() {
     })
  }
  console.log(data)
+//CREATING A FUNCTION FOR THE UPLOADING PROFILE IMAGE
+
+const profileUpload = async (e) => {
+  const file = e.target.files[0]
+
+  const imagePic = await imageUpload(file)
+  // console.log("imagePic",imagePic)
+  setData((prevState)=>{
+    return {
+      ...prevState,
+      profileImage:imagePic
+    }
+  })
+}
 
   return (
     <section id='login'>
       <div className='mx-auto container p-4 mt-[80px]'>
             <div className='bg-white p-2 py-5 w-full max-w-sm mx-auto rounded-md'>
-                <div className='w-20 h-20 mx-auto'>
-                   <img src={loginicons} alt='login icons'/>
+                <div className='w-20 h-20 mx-auto overflow-hidden relative rounded-full'>
+                  <div>
+                    <img src={data.profileImage || loginicons} alt='login icons'/>
+                  </div>
+                  <form>
+                    <label>
+                      <div className='text-xs pb-4 pt-2 bg-opacity-80 cursor-pointer bg-slate-200 text-center w-full absolute bottom-0'>
+                      Upload image
+                      </div>
+                      <input type='file' onChange={profileUpload} className='hidden'/>
+                    </label>
+                  </form>
                 </div>
 
                 <form className='pt-6 flex flex-col gap-4'>
